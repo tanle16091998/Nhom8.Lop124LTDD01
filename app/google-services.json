@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "145586651826",
+    "project_id": "nhom8-lop124ltdd01",
+    "storage_bucket": "nhom8-lop124ltdd01.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:145586651826:android:4859cfa76ffc126529bfab",
+        "android_client_info": {
+          "package_name": "com.example.nhom8lop124ltdd01"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqsQCdaO4zhbBlEe4q-pdUEYqQkFv1NOk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
