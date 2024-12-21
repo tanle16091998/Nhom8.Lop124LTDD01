@@ -10,14 +10,31 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Ảnh đại diện -->
-        <ImageView
-            android:id="@+id/imgAvatar"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:src="@drawable/anhdaidien"
-            android:contentDescription="hello" />
+        <!-- Container for Image and Text -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <!-- Ảnh đại diện -->
+            <ImageView
+                android:id="@+id/imgAvatar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/anhdaidien"
+                android:contentDescription="hello" />
+
+            <!-- Họ và Tên trên ảnh -->
+            <TextView
+                android:id="@+id/tvHoTenTrenAnh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:text="Họ và Tên"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+        </RelativeLayout>
 
         <!-- Nút tải ảnh -->
         <Button
