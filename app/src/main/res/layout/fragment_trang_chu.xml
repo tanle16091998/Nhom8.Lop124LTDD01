@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/Frametrangchu"
+    tools:context=".Trangchu.TrangChuFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_app_moi">
+
+
+        <!-- Hình ảnh đầu trang -->
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/nen2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Ô tìm kiếm phim -->
+        <EditText
+            android:id="@+id/edtSearch"
+            android:layout_width="373dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="-25dp"
+            android:background="@drawable/bg_btn_2"
+            android:gravity="center"
+            android:padding="10dp"
+            android:hint="Nhập phim bạn quan tâm"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Biểu tượng tìm kiếm -->
+
+        <!-- TextView "Sắp chiếu" -->
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="316dp"
+            app:layout_constraintBottom_toBottomOf="@+id/edtSearch"
+            app:layout_constraintEnd_toEndOf="@+id/edtSearch"
+            app:layout_constraintTop_toTopOf="@+id/edtSearch"
+            app:srcCompat="@drawable/ic_search" />
+
+        <!-- ViewPager cho hình ảnh quảng cáo -->
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Sắp chiếu"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtSearch" />
+
+        <ScrollView
+            android:layout_width="391dp"
+            android:layout_height="533dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.97">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPagerImagerSlider"
+                    android:layout_width="407dp"
+                    android:layout_height="319dp"
+                    android:layout_marginTop="-10dp"
+                    android:paddingStart="80dp"
+                    android:paddingEnd="80dp" />
+
+                <Button
+                    android:id="@+id/btn_datve"
+                    android:layout_width="135dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="24dp"
+                    android:backgroundTint="@color/blue"
+                    android:text="Đặt vé"
+                    android:layout_gravity="center"
+                    />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="Bạn cũng có thể xem"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcv_category"
+                    android:layout_width="438dp"
+                    android:layout_height="414dp"
+                    android:layout_margin="10dp" />
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- Nút đặt vé -->
+
+        <!-- TextView "Bạn cũng có thể xem" -->
+
+        <!-- RecyclerView cho danh sách phim -->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

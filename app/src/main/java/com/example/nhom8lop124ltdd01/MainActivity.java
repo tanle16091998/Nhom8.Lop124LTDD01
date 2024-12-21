@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.nhom8lop124ltdd01.Trangchu.TrangChuFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.Firebase;
 import com.google.firebase.database.DatabaseReference;
@@ -31,12 +32,14 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
 
-        loadFragment(new Fragment1());
+
+        loadFragment(new TrangChuFragment());
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("ThòngTinCaNhan"); // Replace "your_node" with the Firebase node name
 
         // Add value to Firebase
         addValueToFirebase("Hello Firebase!");
+
 
 
         bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -45,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 Fragment fragment = null;
                 if (item.getItemId() == R.id.home)
                 {
-                    fragment = new Fragment1();
+                    fragment = new TrangChuFragment();
                 }
                 else
                 if (item.getItemId() == R.id.account)

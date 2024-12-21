@@ -2,5 +2,17 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="xam">#87B4D9</color>
+    <color name="color_datve">#6644F1</color>
+    <color name="Dark_Grey">#757185</color>
+    <color name="light_blue">#3498db</color>
+    <color name="blue">#2980b9</color>
+    <color name="pale_purple">#B3A4EF</color>
+    <color name="gray">#888</color>
+    <color name="tim">#2D125F</color>
+    <color name="timnhat">#775BE7</color>
+    <color name="light">#dfe6e9</color>
+
     <color name="yellow">#BDC56D</color>
 </resources>
