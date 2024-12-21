@@ -23,22 +23,12 @@ import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.a3t_appdatvexemphim.CommentFilm_Fragment;
-import com.example.a3t_appdatvexemphim.DSphim.DSphimhhFragment;
-import com.example.a3t_appdatvexemphim.DSphim.dsFILMHH;
-import com.example.a3t_appdatvexemphim.R;
-import com.example.a3t_appdatvexemphim.Video.Video_Fragment;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.example.nhom8lop124ltdd01.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 
 public class TrangChuFragment extends Fragment {
     private Button but_datve;
@@ -59,20 +49,15 @@ public class TrangChuFragment extends Fragment {
     public List<ClassPhim> DSFilmkd = new ArrayList<>();
     public List<ClassPhim> dsPhim = new ArrayList<>();
     public Map<Long, Long> phimTheLoaiMap = new HashMap<>();
-    public DatabaseReference mData;
-    private List<ClassPhim> danhsachphim = new ArrayList<>();
 
     private String getURLVideo;
     private static final String ARG_USER_ID = "USER_ID"; // Key để truyền userId qua arguments
     private String userId; // Biến lưu userId
 
-    public static TrangChuFragment newInstance(String userId) {
-        TrangChuFragment fragment = new TrangChuFragment();
-        Bundle args = new Bundle();
-        args.putString("USER_ID", userId);
-        fragment.setArguments(args);
-        return fragment;
+    public TrangChuFragment() {
+        // Required empty public constructor
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,34 +75,11 @@ public class TrangChuFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_trang_chu, container, false);
-        mData = FirebaseDatabase.getInstance().getReference();
 
         initViews(view);
-        loadPhimTheLoaiData();
         initViewPager();
-        initRecyclerView();
         initSearchEditText();
         but_datve = view.findViewById(R.id.btn_datve);
-        but_datve.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                List<ClassPhim> danhsachphim = DSFilmhh;
-
-                // Tạo Bundle để truyền danh sách phim sang Fragment
-                Bundle mybundle = new Bundle();
-                mybundle.putParcelableArrayList("danhsachphim", new ArrayList<>(danhsachphim)); // Truyền danh sách phim hoạt hình
-                mybundle.putString("USER_ID", userId); // Truyền userId
-                // Khởi tạo Fragment DSphimhhFragment và gán dữ liệu
-//                DSphimhhFragment fragment = new DSphimhhFragment();
-//                fragment.setArguments(mybundle);
-
-                // Chuyển sang DSphimhhFragment
-//                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-//                transaction.replace(R.id.frame_layout, fragment); // Đảm bảo ID này là ID của FrameLayout trong layout
-//                transaction.addToBackStack(null); // Thêm vào backstack để quay lại TrangChuFragment nếu cần
-//                transaction.commit();
-            }
-        });
 
         // Khởi tạo sliderRunnable
         sliderRunnable = new Runnable() {
@@ -132,92 +94,6 @@ public class TrangChuFragment extends Fragment {
         return view;
     }
 
-    public void loadPhimTheLoaiData() {
-        mData.child("PHIM_THELOAIPHIM").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                phimTheLoaiMap.clear();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    try {
-                        Long maPhim = snapshot.child("MaPhim").getValue(Long.class);
-                        Long maTheLoaiPhim = snapshot.child("MaTheLoaiPhim").getValue(Long.class);
-                        if (maPhim != null && maTheLoaiPhim != null) {
-                            phimTheLoaiMap.put(maPhim, maTheLoaiPhim);
-                        }
-                    } catch (Exception e) {
-                        Log.e("PhimTheLoai", "Lỗi khi chuyển đổi dữ liệu: " + e.getMessage());
-                    }
-                }
-                loadPhimData();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w("TrangChuFragment", "loadPhimTheLoaiData:onCancelled", databaseError.toException());
-                Toast.makeText(getContext(), "Lỗi khi tải dữ liệu thể loại phim", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    public void loadPhimData() {
-        mData.child("PHIM").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                dsPhim.clear();
-                listFilmhh.clear();
-                listFilmhd.clear();
-                listFilmkd.clear();
-                listFilmtc.clear();
-
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    try {
-                        Long maPhim = snapshot.child("MaPhim").getValue(Long.class);
-                        Long maTheLoaiPhim = phimTheLoaiMap.get(maPhim);
-
-                        if (maTheLoaiPhim != null) {
-                            ClassPhim phim = snapshot.getValue(ClassPhim.class);
-                            if (phim != null) {
-                                dsPhim.add(phim);
-                                FILM film = new FILM(phim.TenPhim, phim.HinhAnh, phim.MaPhim.intValue()); // Sử dụng URL hình ảnh từ Firebase
-                                switch (maTheLoaiPhim.intValue()) {
-                                    case 6: // Hoạt hình
-                                        listFilmhh.add(film);
-                                        DSFilmhh.add(phim);
-                                        break;
-                                    case 1: // Hành động
-                                        listFilmhd.add(film);
-                                        DSFilmhd.add(phim);
-                                        break;
-                                    case 4: // Kinh dị
-                                        listFilmkd.add(film);
-                                        DSFilmkd.add(phim);
-                                        break;
-                                    case 2: // Tình cảm
-                                        listFilmtc.add(film);
-                                        DSFilmtc.add(phim);
-                                        break;
-                                    default:
-                                        break;
-                                }
-                            }
-                        }
-
-                    } catch (Exception e) {
-                        Log.e("Phim", "Error parsing data", e);
-                    }
-                }
-
-                createCategories();
-                updateUI();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w("TrangChuFragment", "loadPhimData:onCancelled", databaseError.toException());
-                Toast.makeText(getContext(), "Lỗi khi tải dữ liệu phim", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
     private void initSearchEditText() {
         edtSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -252,7 +128,6 @@ public class TrangChuFragment extends Fragment {
         }
         categoryAdapter.setData(filteredList);
     }
-
 
     public void createCategories() {
         categoryList.clear();
@@ -314,67 +189,6 @@ public class TrangChuFragment extends Fragment {
         });
     }
 
-
-    public void initRecyclerView() {
-        categoryAdapter = new CategoryAdapter(getActivity(), categoryList);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
-        rcvCategory.setLayoutManager(linearLayoutManager);
-        rcvCategory.setAdapter(categoryAdapter);
-
-        categoryAdapter.setOnCategoryClickListener(new CategoryAdapter.OnCategoryClickListener() {
-            @Override
-            public void onCategoryClick(Category category) {
-                List<ClassPhim> danhsachphim = new ArrayList<>();
-                switch (category.getNameCategory()) {
-                    case "Hoạt hình":
-                        danhsachphim = DSFilmhh;
-                        break;
-                    case "Hành động":
-                        danhsachphim = DSFilmhd;
-                        break;
-                    case "Kinh dị":
-                        danhsachphim = DSFilmkd;
-                        break;
-                    case "Tình cảm":
-                        danhsachphim = DSFilmtc;
-                        break;
-                }
-
-                Bundle mybundle = new Bundle();
-                mybundle.putParcelableArrayList("danhsachphim", new ArrayList<>(danhsachphim)); // Sử dụng putParcelableArrayList để truyền danh sách phim
-                mybundle.putString("USER_ID", userId); // Truyền userId
-                DSphimhhFragment fragment = new DSphimhhFragment();
-                fragment.setArguments(mybundle);
-
-                // Chuyển đến Video_Fragment
-                Video_Fragment videoFragment = new Video_Fragment();
-                videoFragment.setArguments(mybundle);
-
-                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, fragment); // Đảm bảo ID này là ID của FrameLayout trong Home activity
-                transaction.addToBackStack(null);  // Thêm vào backstack để quay lại TrangChuFragment nếu cần
-                transaction.commit();
-            }
-
-            @Override
-            public void onFilmClick(dsFILMHH selectedFilm) {
-
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("selectedFilm", selectedFilm);
-                bundle.putParcelableArrayList("danhsachphim", new ArrayList<>(danhsachphim)); // Truyền danh sách phim
-                bundle.putString("USER_ID", userId); // Truyền userId
-                CommentFilm_Fragment commentFilmFragment = new CommentFilm_Fragment();
-                commentFilmFragment.setArguments(bundle);
-
-                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, commentFilmFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
-
-            }
-        });
-    }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -386,6 +200,4 @@ public class TrangChuFragment extends Fragment {
         super.onPause();
         sliderHandler.removeCallbacks(sliderRunnable);
     }
-
-
 }

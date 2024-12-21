@@ -10,8 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.a3t_appdatvexemphim.DSphim.dsFILMHH;
-import com.example.a3t_appdatvexemphim.R;
+
+import com.example.nhom8lop124ltdd01.R;
 
 import java.util.List;
 
@@ -64,9 +64,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
         filmAdapter.setOnFilmClickListener(film -> {
             if (categoryClickListener != null) {
-                // Chuyển đổi FILM thành dsFILMHH
-                dsFILMHH dsfilmhh = new dsFILMHH(film.getTitle(), "", "", "", film.getImageUrl(), film.getFilmId());
-                categoryClickListener.onFilmClick(dsfilmhh);
+//                // Chuyển đổi FILM thành dsFILMHH
+//                dsFILMHH dsfilmhh = new dsFILMHH(film.getTitle(), "", "", "", film.getImageUrl(), film.getFilmId());
+//                categoryClickListener.onFilmClick(dsfilmhh);
             }
         });
     }
@@ -78,7 +78,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     public interface OnCategoryClickListener {
         void onCategoryClick(Category category);
-        void onFilmClick(dsFILMHH film); // Thêm phương thức để xử lý sự kiện click vào phim
+     //   void onFilmClick(dsFILMHH film); // Thêm phương thức để xử lý sự kiện click vào phim
     }
 
     public class CategoryViewHolder extends RecyclerView.ViewHolder {

@@ -11,7 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.a3t_appdatvexemphim.R;
+
+import com.example.nhom8lop124ltdd01.R;
 
 import java.util.List;
 

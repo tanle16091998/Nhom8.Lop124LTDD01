@@ -8,7 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.a3t_appdatvexemphim.R;
+
+import com.example.nhom8lop124ltdd01.R;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;
