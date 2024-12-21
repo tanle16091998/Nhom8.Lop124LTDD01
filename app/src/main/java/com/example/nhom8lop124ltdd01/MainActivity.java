@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 if (item.getItemId() == R.id.account)
                 {
 
-                    fragment = new Fragment2();
+                    fragment = new ThongTinCaNhanFragment();
                 }
                 else
                 if (item.getItemId() == R.id.info)
